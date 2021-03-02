@@ -106,6 +106,28 @@ Again, as highlighted in red, the most significant bit(left most bit) in a signe
 @(deci->bin-table -6 4 #:caption "-8 + 2 = -6 (signed)")
 )
 
+Now knowing that bit patterns can have 2 (or more) meanings, let's go the other way around get some practice converting bit patterns to signed and unsigned decimal representations.
+
+@h3{Check your understanding!}
+@(q "What is 0111 in both signed and unsigned decimal? (given a bitwidth of 4)" 
+@(deci->bin-table 7 4 #:caption "0 + 4 + 2 + 1 = 7 (signed)")
+@(deci->bin-table 7 4 #:caption "0 + 4 + 2 + 1 = 7 (unsigned)")
+"answer: 7,7"
+" ! they're the same because its in the safe range of bit patterns they share in common")
+
+@(q "What is 101100 in both signed and unsigned deicmal? (given a bitwidth of 6)" 
+@(deci->bin-table -20 6 #:caption "-32 + 0 + 8 + 4 + 0 + 0 = -20 (signed)") 
+@(deci->bin-table 44 6 #:caption "32 + 0 + 8 + 4 + 0 + 0 = 44 (unsigned)")
+"answer: -20,44"
+)
+
+@(q "What is 10001 in both signed and unsigned decimal? (given a bitwidth of 5)"  
+@(deci->bin-table -15 5 #:caption "-16 + 0 + 0 + 0 + 0 + 1 = -15 (signed)") 
+@(deci->bin-table 17 5 #:caption "16 + 0 + 0 + 0 + 0 + 1 = 17 (unsigned)")
+"answer: -15,17")
+
+@a[#:href "https://jest-systems.netlify.app/#binary(two's_complement)_to_decimal(unsigned_and_signed)"]{More Exercises Here}
+
 The safe range of converting numbers back and forth between the worlds of unsigned and signed in a 4 bit system is: 0 to 7. Everywhere else, they differ and mismatch which can cause wrap around issues. You'll could end up in situations where:
 
 7 + 1 = -8
