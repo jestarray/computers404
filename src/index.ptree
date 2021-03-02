@@ -9,6 +9,7 @@
 }
 
 @06-BinaryNumbers.html{
-    07-BinaryAddition.html
-    08-ALU.html
+    07-Negative_Numbers_Twos_Complement.html
+    08-BinaryAddition.html
+    09-ALU.html
 }

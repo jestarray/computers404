@@ -5,10 +5,11 @@
     (table #:caption caption (table-headings (list "Division" "Quotient" "Remainder"))
         (table-entries e)))
 
+@(yt "bFLB4dyNKUk")
+
 @h1{Binary Numbers}
 Humans use a base 10 number system for counting numbers, most likely because have 10 fingers. For example, using your fingers to do @code{8 + 4}, since we don't have 11 fingers we close our hands and have to hold a 10 in our mind, reset our fingers and add two: + 2 = 12.
 
-@;img[#:src "/images/pizza_gates.png"]{}
 @(img '((src "/images/dolphin.svg") (height "100px")))
 
 This number system is natural for us but imagine a dolphin counting with it's 2 fins. 1 + 2 = 3, but they don't have 3 fins so they have to hold in their mind increments of 2. Computers are just like this in that they use a base 2 system(aka binary) of couting in contrast to our base 10(decimal).

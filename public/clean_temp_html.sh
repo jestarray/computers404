@@ -1,3 +1,2 @@
-raco pollen render
-raco pollen publish
+#!/bin/bash
 rm *.html

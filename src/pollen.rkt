@@ -130,6 +130,15 @@
                conv]))
   (string->list t))
 
+
+; number number -> txexpr
+; 101011 -> 101011_2 where _2 will be printed in a subscript form
+(define (base n n2)
+  (txexpr 'span empty
+          (list (if (number? n) (number->string n) n) 
+                (txexpr 'sub empty (list (cond [(number? n2) (number->string n2)]
+                                               [else n2]))))))
+
 ;String -> txexpr
 ;returns hashlink id of an h2
 (define (sub-heading s)
