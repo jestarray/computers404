@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
+
+    <title>Binary Addition</title>
+</head>
+
+<body>
+    <div class="container">
+        <main class="main-wrapper">
+            <div id="prev">← <a href="/06-BinaryNumbers.html"> Binary Numbers</a></div>
+            <div id="home"><a href="/index.html">Index</a></div>
+            <div id="next"><a href="/07-Negative_Numbers_Twos_Complement.html">Negative Binary Numbers</a> →</div>
+            <article>
+                <h1>Binary Addition</h1><h2 id="how_to_add_binary_numbers?"><a class="anchor" href="#how_to_add_binary_numbers?">#</a>How to add binary numbers?</h2><h3>All 5 possible scenarios of binary addition:</h3><div class="layout-spread-row wrap"><img src="/images/bin-1.svg" style="width: 10vh"/><img src="/images/bin-2.svg" style="width: 10vh"/><img src="/images/bin-3.svg" style="width: 10vh"/><img src="/images/bin-4.svg" style="width: 10vh"/><img src="/images/bin-5.svg" style="width: 10vh"/></div><p><br/>You add binary numbers the same as you would regular decimal numbers! In a decimal system, we carry to the left whenever we go above 9. In a binary system we carry when we go above 2 as highlighted in red.<br/><br/>To make sense of why 1 + 1 + 1 = 11, imagine 5 + 5 + 5. We add the two fives: 5 + 5 = 10 and we have to carry over the 1 but we still have a 5 left over, leaving us with 15.<br/><br/>Let’s add 4 bit binary numbers 0111 + 1110.<br/></p><ol class="steps"><li><details open="true"><summary class="step">Start from right to left (&lt;–)</summary><pre>
+  0 1 1 1 (7)
++ 1 1 1 0 (14)
+__________
+        1
+        </pre></details></li><li><details open="true"><summary class="step">Add normally and carry as needed</summary><div class="layout-spread-row wrap"><pre>
+    1 &lt;- carry 
+  0 1 1 1 (7)
++ 1 1 1 0 (14)
+__________
+      0 1 </pre><pre>
+  1 1 &lt;- carry 
+  0 1 1 1 (7)
++ 1 1 1 0 (14)
+__________
+    1 0 1  </pre><pre>
+1 1 1 &lt;- carry 
+  0 1 1 1 (7)
++ 1 1 1 0 (14)
+__________
+1 0 1 0 1 (21) </pre></div></details></li><li><details open="true"><summary class="step">Consider effect of overflow</summary><p>       </p><pre>
+ 1 1 1 &lt;- carries 
+  [0 1 1 1] (7)
++ [1 1 1 0] (14)
+_______
+ 1[0 1 0 1] (21) or (5 if we can’t expand)
+        </pre><p> The answer can be either 0101 or 10101 on paper! In software however it depends on the programming language. Some decide to crash(rust), some end up wrapping around (C)<br/><br/> Recall that computers have finite limits to what they can represent as noted by the brackets [] indicating a fixed width. 4 bits can only represent a maximum number of 16 things, and here, the sum of the two numbers go over 15! The overflow bit may be dropped if we can’t expand the bit-width, resulting in 5 as our answer. This property will be important later.</p></details></li></ol><table><caption>unsigned</caption><thead><tr><th>Decimal</th><th>Binary</th></tr></thead><tbody><tr><td>0</td><td>0000</td></tr><tr><td>1</td><td>0001</td></tr><tr><td>2</td><td>0010</td></tr><tr><td>3</td><td>0011</td></tr><tr><td>4</td><td>0100</td></tr><tr><td>5</td><td>0101</td></tr><tr><td>6</td><td>0110</td></tr><tr><td>7</td><td>0111</td></tr><tr><td>8</td><td>1000</td></tr><tr><td>9</td><td>1001</td></tr><tr><td>10</td><td>1010</td></tr><tr><td>11</td><td>1011</td></tr><tr><td>12</td><td>1100</td></tr><tr><td>13</td><td>1101</td></tr><tr><td>14</td><td>1110</td></tr><tr><td>15</td><td>1111</td></tr></tbody></table><h3>Check your understanding!</h3><p><details><summary class="question">What is 101 + 001 ? (given a 3 bit-width)</summary><pre>
+    1
+  1 0 1 (5)
++ 0 0 1 (1)
+________
+  1 1 0 (6)
+</pre></details><br/><br/><details><summary class="question">What is 111 + 111 ? (given a 3 bit-width)</summary><pre>
+1 1 1
+  1 1 1 (7)
++ 1 1 1 (7)
+________
+1 1 1 0 (14) or (6 because of overflow wraparound)
+</pre></details><br/><br/><a href="https://jest-systems.netlify.app/#binary_addition(unsigned)">More Exercises Here</a> with a variable bit-width</p>
+            </article>
+        </main>
+    </div>
+</body>
+
+</html>

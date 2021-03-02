@@ -257,6 +257,8 @@
     (define imp (dynamic-require (string-append (symbol->string page-file) ".pm") 'doc))
     (define time-info (select 'time imp))
     (define link-to-page (symbol->string page-file))
+    ; MAKE SURE EVERY PAGE HAS AN H1
+    ; (println page-file)
     (txexpr 'li empty (list (cond [(not time-info) ""]
                                   [else (string-append time-info " --- ")])
                             (txexpr 'a (list (cons 'href (cons link-to-page '()))) (list (select 'h1 imp))))))
@@ -265,6 +267,19 @@
     (txexpr 'ul '((style "list-style-type: none;")) (map wrap items)))
   (map sec ls))
 
+#;
+(define test '(pagetree-root
+  (00-Overview.html
+   01-Language.html
+   02-Boolean_Logic.html
+   03-Optimization.html
+   04-NAND_HDL.html
+   05-Multibit_buses.html)
+  (06-BinaryNumbers.html
+   07-Binary_Addition.html
+   07-Negative_Numbers_Twos_Complement.html
+   08-Binary_Subtraction.html
+   09-ALU.html)))
 #;
 (generate-toc (cdr test))
 

@@ -8,6 +8,7 @@ these are my writeups for a youtube series I'm doing on computer systems. It use
 * tagging system and ability to search through them fast
 * make more mobile friendly(pre is making pages scale)
 * slugify urls
+* research why lighthouse reports 2 seconds spent on styling css before rendering the page interactive
 
 ## how to build:
 
