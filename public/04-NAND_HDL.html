@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
+
+    <title>NAND theorem</title>
+</head>
+
+<body>
+    <div class="container">
+        <main class="main-wrapper">
+            <div id="prev">← <a href="/03-Optimization.html"> Factoring</a></div>
+            <div id="home"><a href="/index.html">Index</a></div>
+            <div id="next"><a href="/05-Multibit_buses.html">Multibit Buses</a> →</div>
+            <article>
+                <h1>NAND theorem</h1><p><br/><details><summary style="color:red;">Youtube</summary><p><iframe srcdoc="&lt;style&gt;*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}&lt;/style&gt;&lt;a href=https://www.youtube.com/embed/RQzmQvi1tdU?autoplay=1&gt;&lt;img src=https://img.youtube.com/vi/RQzmQvi1tdU/hqdefault.jpg&gt;&lt;span&gt;▶&lt;/span&gt;&lt;/a&gt;" allow="picture-in-picture" allowfullscreen="true" loading="lazy" width="560" height="315"></iframe></p></details><br/><br/>A NAND gate is made up of 1 AND gate, and 1 NOT gate to invert its output. It only outputs a 0 when both inputs are 1. The truth table looks like this:<br/></p><table><caption>NAND<img src="/images/NAND_gate.png"/></caption><thead><tr><th>A</th><th>B</th><th>OUT</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>1</td></tr><tr><td>0</td><td>1</td><td>1</td></tr><tr><td>1</td><td>0</td><td>1</td></tr><tr><td>1</td><td>1</td><td>0</td></tr></tbody></table><p><br/>It’s known as the universal gate because it is the building block for all the other gates, like AND, NOT, OR, etc<br/>It’s so popular in fact, that it gets its own special little notation/symbol to shorten drawing it out, notice a dot at the end of an AND gate.<br/><br/>I know, it’s a little weird, because as I just said, NAND is composed of two gates, 1 AND, 1 NOT, so why do we have to build them from a NAND gate if we already have them? Isn’t it more efficent to just use the AND and NOT gates from the get go, rather than having to build them through a NAND gate? Why do we have to go through the middle man of the NAND gate?<br/><br/>This is an electrical engineering question that involves voltages and transistors and etc, that I’m not qualified to answer, but what I can say is that its not that efficent to cut out the NAND gate, sometimes it makes things worse, and I will link to sources below if you’re curious.<br/><br/>For this course in particular, we’re just going to focus on using the abstraction of the truth table and combing gates together, not worrying about where the logic gates come from, how they are implemented, or how efficent things are. This is the basis of “abstraction”, no one needs to know mechanical engineering to drive a car, instead an interface is exposed, the steering wheel and the pedal, to just tell you what does what, so you don’t need to be concerned with how every gear turns. If you’re curious about the HOW, look into physics and EE.<br/><br/>Alright, you are to start off with a NAND gate, and work your way up to build other gates, and when you have built those other gates, you can use those to build other gates. Let’s hop to the hardware simulator so you get what I mean.<br/><br/>The hardware simulator runs on mac windows and linux, but we have to install java, so go to this link: https://www.java.com/en/download/<br/>click next a bunch of times.<br/><br/>extract the zip file of the hardware simulator and run it<br/><br/>visualization tools:<br/>http://nandgame.com/<br/>circutverse<br/><br/>HDL:<br/>No loops, no conditional(if else), just plugin in variables. Case sensitive, madatory semicolons, commas, be careful for typos<br/><br/>internal pins<br/><br/>test script(you’re really never going to touch the test script)<br/>compare file<br/><br/>I recommend getting things working with visual tool first, then transcribe into text<br/><br/> https://electronics.stackexchange.com/questions/394890/why-are-nand-gates-used-to-make-and-gates-in-computers</p>
+            </article>
+        </main>
+    </div>
+</body>
+
+</html>
