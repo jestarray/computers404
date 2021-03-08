@@ -51,13 +51,13 @@ Let's talk about two's complement and what logistics drive 1010 = -6
 @(deci->bin-table -6 6 #:caption "-32 + 16 + 8 + 2 = -6 (6 bit-width)")
 @(deci->bin-table -6 8 #:caption "-128 + 64 + 32 + 16 + 8 + 2 = -6 (8 bit-width)")
 
-@b{Notice: Only the most significant bit(left most highlighted in red) holds is of a negative weight.} 
+@strong{Notice: Only the most significant bit(left most highlighted in red) holds is of a negative weight.} 
 
 Given a bit-width of 4, the decimal number @(base -6 10) = @(base 1010 2)
 Given a bit-width of 6, the decimal number @(base -6 10) = @(base 111010 2)
 Given a bit-width of 8, the decimal number @(base -6 10) = @(base 11111010 2)
 
-When representing negative numbers, @b{the width matters, because only the most signifncant bit(left most as highlighted in red) holds the negative weight} needed to split the positive and negative numbers as seen in the table. It's important to notice that all negative numbers have a leading bit of 1.
+When representing negative numbers, @strong{the width matters, because only the most signifncant bit(left most as highlighted in red) holds the negative weight} needed to split the positive and negative numbers as seen in the table way below. It's important to notice that all negative numbers have a leading bit of 1.
 
 Let's try a few examples with variable bit-widths:
 
@@ -66,22 +66,31 @@ Let's try a few examples with variable bit-widths:
 @(q "What is -15 in binary? (given a bitwidth of 5)"  @(deci->bin-table -15 5 #:caption "-16 + 0 + 0 + 0 + 0 + 1 = -15"))
 @(q "What is -20 in binary? (given a bitwidth of 6)"  @(deci->bin-table -20 6 #:caption "-32 + 0 + 8 + 4 + 0 + 0 = -20"))
 
-@a[#:href "https://jest-systems.netlify.app/#decimal_to_binary(two's_complement)"]{More Exercises Here}
+@a[#:href "https://jest-systems.netlify.app/#decimal_to_binary(two's_complement)"]{More Two's Complement Exercises}
 
 
 @sub-heading{Multiple Meanings}
 
-In English the word "bark" can mean:
+In English we  have words like 
+
+"bark":
 @ol{
     @li{A noise that a dog makes.}
     @li{What trees are mare out of.}
 }
+"sex":
+@ol{
+  @li{either of the two main categories (male and female) into which humans and most other living things are divided on the basis of their reproductive functions.}
+  @li{an activity}
+}
 
+@h4{One word, multiple meanings!}
 Likewise in the world of bits, the bit pattern: @(base 1101010 2) can mean:
 @ol{
     @li{The letter "j"}
     @li{The number @(base 106 10)}
     @li{The number @(base -22 10)}
+    @li{The hexadecimal number @(base "D2" 16)}
 }
 Computers only see zeros and ones, its how and what we humans decide to interpret them that gives them meaning/value.
 
@@ -99,7 +108,7 @@ Consider all the possibilities of unsigned and signed 4 bit numbers:
 
 @(layout-spread-row @(max-unsigned-limit-table 4) @(max-signed-limit-table 4))
 
-Again, as highlighted in red, the most significant bit(left most bit) in a signed number @(2^ "n")-1 takes on a @b{negative weight} (in this case it's 8).
+Again, as highlighted in red, the most significant bit(left most bit) in a signed number @(2^ "bitwidth-1") takes on a @b{negative weight} (in this case it's 8).
 
 @(layout-spread-row
 @(deci->bin-table 10 4 #:caption "8 + 2 = 10 (unsigned)")
@@ -126,15 +135,9 @@ Now knowing that bit patterns can have 2 (or more) meanings, let's go the other 
 @(deci->bin-table 17 5 #:caption "16 + 0 + 0 + 0 + 0 + 1 = 17 (unsigned)")
 "answer: -15,17")
 
-@a[#:href "https://jest-systems.netlify.app/#binary(two's_complement)_to_decimal(unsigned_and_signed)"]{More Exercises Here}
+@a[#:href "https://jest-systems.netlify.app/#binary(two's_complement)_to_decimal(unsigned_and_signed)"]{More Two's complement signed and unsigned exercises}
 
-The safe range of converting numbers back and forth between the worlds of unsigned and signed in a 4 bit system is: 0 to 7. Everywhere else, they differ and mismatch which can cause wrap around issues. You'll could end up in situations where:
-
-7 + 1 = -8
-
-??? Wtf!? we'll later explore in the next section.
-
-Imagine you're storing money in your bank account. If the number of bits you have overflows, it will wrap around and be negative. We'll cover adding and subtracting binary numbers in the next section.
+The safe range of converting numbers back and forth between the worlds of unsigned and signed in a 4 bit system is: 0 to 7. This is where the bitpatterns are exactly the same. Everywhere else, they differ and mismatch which can cause wrap around issues and wrong math which we will cover extensively in the next section. Notice however that when you cast between signed to unsigned and vice versa, the bit patterns do not change but the resulting decimal value does.
 
 If we want  to represent -14, it's only possible in bit-width of 5 and above. Lets see this in action:
 

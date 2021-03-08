@@ -79,4 +79,4 @@ ________
 1 1 1 0 (14) or (6 because of overflow wraparound)
 "))
 
-@a[#:href "https://jest-systems.netlify.app/#binary_addition(unsigned)"]{More Exercises Here} with a variable bit-width
+@a[#:href "https://jest-systems.netlify.app/#binary_addition(unsigned)"]{More Binary Addition problems with variable bit-width Here}

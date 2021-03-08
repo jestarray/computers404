@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
+    <link  rel="stylesheet" href="https://unpkg.com/sanitize.css"/>
     <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
     @(define has-code-block? (select 'code doc))
     @when/splice[has-code-block?]{
