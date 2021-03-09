@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link  rel="stylesheet" href="https://unpkg.com/sanitize.css"/>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/sanitize.css"/>
     <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
 
     <title>Binary Subtraction</title>
@@ -24,18 +24,7 @@
 _______________
 1 [ 0 0 1 0 ] (2)
 ^ overflow
-</pre><p>the overflow is ignored because it can’t fit inside the bit width.</p><table><caption>2 in binary (signed)</caption><thead><tr><th>8</th><th>4</th><th>2</th><th>1</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>1</td><td>0</td></tr></tbody></table><p>Due to tossing away the overflow, we get <span>2<sub>10</sub></span>, which is the answer to our subtraction problem in decimal: 6 + -4 = 2</p></details></li></ol><div class="layout-spread-row wrap"><table><caption>signed</caption><thead><tr><th>Decimal</th><th>Binary</th></tr></thead><tbody><tr><td>-8</td><td><span><span style="color:red;">1</span>000</span></td></tr><tr><td>-7</td><td><span><span style="color:red;">1</span>001</span></td></tr><tr><td>-6</td><td><span><span style="color:red;">1</span>010</span></td></tr><tr><td>-5</td><td><span><span style="color:red;">1</span>011</span></td></tr><tr><td>-4</td><td><span><span style="color:red;">1</span>100</span></td></tr><tr><td>-3</td><td><span><span style="color:red;">1</span>101</span></td></tr><tr><td>-2</td><td><span><span style="color:red;">1</span>110</span></td></tr><tr><td>-1</td><td><span><span style="color:red;">1</span>111</span></td></tr><tr><td>0</td><td>0000</td></tr><tr><td>1</td><td>0001</td></tr><tr><td>2</td><td>0010</td></tr><tr><td>3</td><td>0011</td></tr><tr><td>4</td><td>0100</td></tr><tr><td>5</td><td>0101</td></tr><tr><td>6</td><td>0110</td></tr><tr><td>7</td><td>0111</td></tr></tbody></table></div><p><br/>There are a few problems with <b>signed</b> arithmetic.<br/></p><h3>Positive overflow:</h3><p>Positive + Positive = Negative<br/>Adding two positive numbers can result in a negative value</p><pre>
-  0110 (6)
-+ 0011 (3)
-___________
-  1001 (-7)
-</pre><h3>Negative overflow:</h3><p>Negative + Negative = Positive<br/>Adding two negative numbers will result in a positive</p><pre>
- 1 11 
-  1011 (-5)
-+ 1011 (-5)
-________
-  0110 (6)
-</pre><p><br/>If you’re adding two signed numbers of opposite sign, e.g positive + negative, you will never overflow<br/><br/>New hardware is not required for subtraction, we just re-use what we do in addition!<br/><br/><details><summary class="more-examples">Extra Examples</summary><pre>
+</pre><p>the overflow is ignored because it can’t fit inside the bit width.</p><table><caption>2 in binary (signed)</caption><thead><tr><th>8</th><th>4</th><th>2</th><th>1</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>1</td><td>0</td></tr></tbody></table><p>Due to tossing away the overflow, we get <span>2<sub>10</sub></span>, which is the answer to our subtraction problem in decimal: 6 + -4 = 2</p></details></li></ol><div class="layout-spread-row wrap"><table><caption>signed</caption><thead><tr><th>Decimal</th><th>Binary</th></tr></thead><tbody><tr><td>-8</td><td><span><span style="color:red;">1</span>000</span></td></tr><tr><td>-7</td><td><span><span style="color:red;">1</span>001</span></td></tr><tr><td>-6</td><td><span><span style="color:red;">1</span>010</span></td></tr><tr><td>-5</td><td><span><span style="color:red;">1</span>011</span></td></tr><tr><td>-4</td><td><span><span style="color:red;">1</span>100</span></td></tr><tr><td>-3</td><td><span><span style="color:red;">1</span>101</span></td></tr><tr><td>-2</td><td><span><span style="color:red;">1</span>110</span></td></tr><tr><td>-1</td><td><span><span style="color:red;">1</span>111</span></td></tr><tr><td>0</td><td>0000</td></tr><tr><td>1</td><td>0001</td></tr><tr><td>2</td><td>0010</td></tr><tr><td>3</td><td>0011</td></tr><tr><td>4</td><td>0100</td></tr><tr><td>5</td><td>0101</td></tr><tr><td>6</td><td>0110</td></tr><tr><td>7</td><td>0111</td></tr></tbody></table></div><p><br/><details><summary class="more-examples">Extra Examples</summary><pre>
 Example: -8 + 3 = -5
 
   [ 1 0 0 0 ] (-8)
@@ -68,7 +57,18 @@ _______________
 + [ 1 1 0 0 0 ] (-8)
 _______________
 1 [ 1 0 0 0 0 ] (-16)
-</pre></details><br/><br/><a href="https://jest-systems.netlify.app/#binary_subtraction(two's_complement)">More Signed Binary Subtraction problems with variable bitwidth</a></p>
+</pre></details><br/><br/>Fun Fact: New hardware is not required for subtraction, we just re-use what we do in addition!<br/><br/><a href="https://jest-systems.netlify.app/#binary_subtraction(two's_complement)">More Signed Binary Subtraction problems with variable bitwidth</a><br/></p><h2 id="overflow_problems"><a class="anchor" href="#overflow_problems">#</a>Overflow Problems</h2><p><br/>There are a few problems with <b>signed</b> arithmetic.<br/></p><h3>Positive overflow:</h3><p>Positive + Positive = Negative<br/>Adding two positive numbers can result in a negative value</p><pre>
+  0110 (6)
++ 0011 (3)
+___________
+  1001 (-7)
+</pre><h3>Negative overflow:</h3><p>Negative + Negative = Positive<br/>Adding two negative numbers will result in a positive</p><pre>
+ 1 11 
+  1011 (-5)
++ 1011 (-5)
+________
+  0110 (6)
+</pre><p><br/>If you’re adding two signed numbers of opposite sign, e.g positive + negative, you will never overflow<br/><br/><br/><a href="https://jest-systems.netlify.app/#binary_subtraction(two's_complement)">More Signed Overflow Problems</a></p>
             </article>
         </main>
     </div>

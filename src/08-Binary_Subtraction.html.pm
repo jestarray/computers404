@@ -39,32 +39,6 @@ Due to tossing away the overflow, we get @(base 2 10), which is the answer to ou
 @(max-signed-limit-table 4)
 )
 
-There are a few problems with @b{signed} arithmetic.
-
-@h3{Positive overflow:}
-Positive + Positive = Negative
-Adding two positive numbers can result in a negative value
-@(pre "
-  0110 (6)
-+ 0011 (3)
-___________
-  1001 (-7)
-")
-@h3{Negative overflow:}
-Negative + Negative = Positive
-Adding two negative numbers will result in a positive
-@(pre "
- 1 11 
-  1011 (-5)
-+ 1011 (-5)
-________
-  0110 (6)
-")
-
-If you're adding two signed numbers of opposite sign, e.g positive + negative, you will never overflow
-
-
-
 @more-examples{
 @(pre "
 Example: -8 + 3 = -5
@@ -117,3 +91,32 @@ _______________
 Fun Fact: New hardware is not required for subtraction, we just re-use what we do in addition!
 
 @a[#:href "https://jest-systems.netlify.app/#binary_subtraction(two's_complement)"]{More Signed Binary Subtraction problems with variable bitwidth}
+
+@sub-heading{Overflow Problems}
+
+There are a few problems with @b{signed} arithmetic. 
+
+@h3{Positive overflow:}
+Positive + Positive = Negative
+Adding two positive numbers can result in a negative value
+@(pre "
+  0110 (6)
++ 0011 (3)
+___________
+  1001 (-7)
+")
+@h3{Negative overflow:}
+Negative + Negative = Positive
+Adding two negative numbers will result in a positive
+@(pre "
+ 1 11 
+  1011 (-5)
++ 1011 (-5)
+________
+  0110 (6)
+")
+
+If you're adding two signed numbers of opposite sign, e.g positive + negative, you will never overflow
+
+
+@a[#:href "https://jest-systems.netlify.app/#binary_subtraction(two's_complement)"]{More Signed Overflow Problems}
