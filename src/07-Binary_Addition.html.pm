@@ -1,6 +1,8 @@
 #lang pollen
 @h1{Binary Addition}
 
+@(yt "_XEl45i8YqM")
+
 @sub-heading{How to add binary numbers?}
 
 @h3{All 5 possible scenarios of binary addition:}

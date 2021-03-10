@@ -1,6 +1,8 @@
 #lang pollen
 @h1{Negative Binary Numbers}
 
+@(yt "Q32TDUTGfQM")
+
 @sub-heading{Negative aka Signed Numbers in Two's Complement}
 Signed numbers are numbers that can take on @b{negative} values. It's called @b{signed} because it can take on a "negative sign" as well as a positive sign. This notation of representing negative numbers is called @b{two's complement}.
 
