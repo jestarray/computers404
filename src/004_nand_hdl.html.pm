@@ -1,19 +1,19 @@
 #lang pollen
 
-@h1{NAND theorem}
+◊h1{NAND theorem}
 
-@(yt "RQzmQvi1tdU")
+◊(yt "RQzmQvi1tdU")
 
 A NAND gate is made up of 1 AND gate, and 1 NOT gate to invert its output. It only outputs a 0 when both inputs are 1. The truth table looks like this:
 
-@(table 
+◊(table 
     (table-headings (list "A" "B" "OUT"))
 (table-entries 
 (list "0" "0" "1")
 (list "0" "1" "1")
 (list "1" "0" "1")
 (list "1" "1" "0")
-) #:caption (list "NAND" (p-img "/images/NAND_gate.png")))
+) #:caption (list "NAND" ◊img[#:src "/images/nand_gate.svg"]{}))
 
 It's known as the universal gate because it is the building block for all the other gates, like AND, NOT, OR, etc
 It's so popular in fact, that it gets its own special little notation/symbol to shorten drawing it out, notice a dot at the end of an AND gate.

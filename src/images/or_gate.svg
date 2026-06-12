@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" width="200" height="100" font-family="sans-serif">
+
+  <line x1="15" y1="30" x2="55" y2="30" stroke="black" stroke-width="2.5">
+    <animate attributeName="stroke"
+      values="black;black;red;red;black"
+      dur="8s" repeatCount="indefinite"
+      keyTimes="0;0.25;0.5;0.75;1"/>
+  </line>
+
+  <line x1="15" y1="70" x2="55" y2="70" stroke="black" stroke-width="2.5">
+    <animate attributeName="stroke"
+      values="black;red;black;red;black"
+      dur="8s" repeatCount="indefinite"
+      keyTimes="0;0.25;0.5;0.75;1"/>
+  </line>
+
+  <!-- OR gate -->
+  <path d="M55 15
+           Q80 50 55 85
+           Q95 85 110 50
+           Q95 15 55 15"
+        fill="none" stroke="black" stroke-width="2.5"/>
+
+  <line x1="110" y1="50" x2="145" y2="50" stroke="black" stroke-width="2.5">
+    <animate attributeName="stroke"
+      values="black;red;red;red;black"
+      dur="8s" repeatCount="indefinite"
+      keyTimes="0;0.25;0.5;0.75;1"/>
+  </line>
+
+  <circle cx="165" cy="50" r="10" stroke="black" stroke-width="2.5" fill="white">
+    <animate attributeName="fill"
+      values="white;gold;gold;gold;white"
+      dur="8s" repeatCount="indefinite"
+      keyTimes="0;0.25;0.5;0.75;1"/>
+  </circle>
+
+  <text x="5" y="34" font-size="12">A</text>
+  <text x="5" y="74" font-size="12">B</text>
+
+</svg>

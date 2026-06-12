@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="220" viewBox="0 0 560 220" role="img" aria-label="Base 2 Binary">
+  <style>
+    .bg {
+      fill: #0f172a;
+    }
+
+    .title {
+      fill: #e2e8f0;
+      font-family: system-ui, sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      fill: #94a3b8;
+      font-family: system-ui, sans-serif;
+      font-size: 13px;
+    }
+
+    .slot {
+      fill: #020617;
+      stroke: #334155;
+      stroke-width: 2;
+    }
+
+    .digit {
+      fill: #f8fafc;
+      font-family: ui-monospace, monospace;
+      font-size: 56px;
+      font-weight: 700;
+      text-anchor: middle;
+      dominant-baseline: middle;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    .label {
+      fill: #94a3b8;
+      font-family: system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      text-anchor: middle;
+    }
+
+    .decimal {
+      fill: #94a3b8;
+      font-family: ui-monospace, monospace;
+      font-size: 16px;
+      text-anchor: middle;
+    }
+
+    .bump {
+      animation: bump 150ms ease-out;
+    }
+
+    @keyframes bump {
+      from {
+        transform: translateY(-4px) scale(1.08);
+      }
+      to {
+        transform: translateY(0) scale(1);
+      }
+    }
+  </style>
+
+  <rect class="bg" width="560" height="220" rx="20"/>
+
+  <text class="title" x="280" y="30" text-anchor="middle">
+    Base 2 Binary Numbers
+  </text>
+
+  <g transform="translate(40,80)">
+    <!-- Power labels -->
+    <text class="label" x="60"  y="-10">8</text>
+    <text class="label" x="180" y="-10">4</text>
+    <text class="label" x="300" y="-10">2</text>
+    <text class="label" x="420" y="-10">0</text>
+
+    <!-- Slots -->
+    <rect class="slot" x="0"   y="0" width="120" height="80" rx="14"/>
+    <rect class="slot" x="120" y="0" width="120" height="80" rx="14"/>
+    <rect class="slot" x="240" y="0" width="120" height="80" rx="14"/>
+    <rect class="slot" x="360" y="0" width="120" height="80" rx="14"/>
+
+    <!-- Digits -->
+    <text id="b3" class="digit" x="60"  y="40">0</text>
+    <text id="b2" class="digit" x="180" y="40">0</text>
+    <text id="b1" class="digit" x="300" y="40">0</text>
+    <text id="b0" class="digit" x="420" y="40">0</text>
+  </g>
+
+  <text id="decimal" class="decimal" x="280" y="190">
+    decimal: 0
+  </text>
+
+  <script><![CDATA[
+    (function () {
+      const ids = ["b3", "b2", "b1", "b0"];
+      const els = ids.map(id => document.getElementById(id));
+      const decimal = document.getElementById("decimal");
+
+      let n = 0;
+
+      function setDigit(el, value) {
+        const next = String(value);
+
+        if (el.textContent !== next) {
+          el.textContent = next;
+
+          el.classList.remove("bump");
+          void el.getBBox(); // restart animation
+          el.classList.add("bump");
+        }
+      }
+
+      function render(value) {
+        const bits = value.toString(2).padStart(4, "0");
+
+        for (let i = 0; i < 4; i++) {
+          setDigit(els[i], bits[i]);
+        }
+
+        decimal.textContent = "decimal: " + value;
+      }
+
+      render(n);
+
+      setInterval(() => {
+        n = (n + 1) % 16;   // 0 through 8 inclusive
+        render(n);
+      }, 1000);
+    })();
+  ]]></script>
+</svg>

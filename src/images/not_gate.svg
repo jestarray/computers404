@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" width="200" height="100" font-family="sans-serif">
+
+  <line x1="15" y1="50" x2="55" y2="50" stroke="black" stroke-width="2.5">
+    <animate attributeName="stroke"
+      values="black;red;black"
+      dur="4s" repeatCount="indefinite"
+      keyTimes="0;0.5;1"/>
+  </line>
+
+  <!-- NOT gate -->
+  <path d="M55 25 L55 75 L95 50 Z"
+        fill="none" stroke="black" stroke-width="2.5"/>
+
+  <circle cx="103" cy="50" r="5"
+          fill="white" stroke="black" stroke-width="2.5"/>
+
+  <line x1="108" y1="50" x2="145" y2="50"
+        stroke="black" stroke-width="2.5">
+    <animate attributeName="stroke"
+      values="red;black;red"
+      dur="4s" repeatCount="indefinite"
+      keyTimes="0;0.5;1"/>
+  </line>
+
+  <circle cx="165" cy="50" r="10"
+          stroke="black" stroke-width="2.5"
+          fill="gold">
+    <animate attributeName="fill"
+      values="gold;white;gold"
+      dur="4s" repeatCount="indefinite"
+      keyTimes="0;0.5;1"/>
+  </circle>
+
+  <text x="5" y="54" font-size="12">A</text>
+
+</svg>

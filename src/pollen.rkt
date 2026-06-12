@@ -4,21 +4,90 @@
 (require pollen/core)
 (require pollen/pagetree)
 
-
 (provide (all-defined-out)) ;make everything global in this file
 
+(define (practice-url name)
+  (string-append "https://jestlearn.com/how_to_code/#" name))
+
+; String -> List<(String, String)>
+; read the contents of the filename from "starter" and "solution" directores and produce List<(FilePath, Contents)>
+(define (starter&solution filename)
+  ; Path -> String
+  ; returns the file string with the first 3 lines if it contains racket teaching lang metadata
+  (define (strip-meta path)
+    (define contents (file->lines path #:line-mode 'any))
+    (cond [(<= (length contents) 3) contents]
+          [else
+           (define third-line (third contents))
+           (define has-metadata? (and (>= (string-length third-line) 8) (string=? (substring third-line 0 7) "#reader")))
+           (string-join (if has-metadata?
+                            (drop contents 3)
+                            contents) "\n")]))
+
+  (define starter-fname (string-append "starter/" filename "_starter.rkt"))
+  ; (println (file->string starter-fname))
+  ; (println (strip-meta starter-fname))
+  ; (println (file->lines starter-fname #:line-mode 'return-linefeed))
+  (define solution-fname (string-append "solutions/" filename "_solution.rkt"))
+  (define file-contents (map strip-meta (list starter-fname solution-fname)))
+  (list (list starter-fname (car file-contents))
+        (list solution-fname (cadr file-contents))))
+
+
+; String(s) -> txexpr
+; creates codeblocks with optional data src for download
+; (racket-code-block #:data-src "mypath.rkt" "foo" "baz" "bar")
+(define (racket-code-block #:data-src [src ""] . contents)
+  (txexpr 'pre
+          (if (non-empty-string? src)
+              `((class "line-numbers match-braces rainbow-braces") (data-src ,src) (data-download-link ""))
+              `((class "line-numbers match-braces rainbow-braces")))
+          (list (txexpr 'code '((class "language-racket")) contents))))
+
+; String -> Txexpr
+; short for "racket-1-line" produces a racket 1 liner of code
+(define (r1-liner . contents)
+  (txexpr 'code '((class "language-racket")) contents))
+
+; String -> txexpr
+(define (code-problem filename)
+  (define files (starter&solution filename))
+  (define starter (car files))
+  (define starter-path (car starter))
+  (define starter-contents (cadr starter))
+  (define solution (cadr files))
+  (define solu-path (car solution))
+  (define solu-contents (cadr solution))
+  ;todo: add option to keep the Q block open?
+  (q (string-append "Exercise " filename) (racket-code-block #:data-src starter-path starter-contents)
+     (q "Answer" (racket-code-block #:data-src solu-path solu-contents)))
+  )
+
+; string -> txexpr
+; returns a search link to the search of the racket docs
+(define (rk op)
+  (txexpr 'a (list (list 'href (string-append "https://docs.racket-lang.org/search/index.html?q=" op)))
+          (list (txexpr 'code empty
+                        (list op)))))
+
+;todo: introduce (slide-only) content? that is invis in reading mode and only vis in slide_mode ?
+; to active slidemode, hit f12 and run the global function slide_mode()
+(define (slide . contents)
+  (txexpr 'section '((class "slide")) contents))
+
+;(define command-char #\◊)
 (module setup racket/base
   (provide (all-defined-out))
   (require pollen/setup)
   (define project-server-port 1111)
-  (define command-char #\@)
-  (define publish-directory (build-path (current-directory) 'up "public"))
+  (define publish-directory (path->complete-path (build-path 'up "docs")))
   (define current-project-root (current-directory))
-  (define block-tags (append (list 'summary) default-block-tags))) ;tags that aren't wrapped in <p?
+  (define block-tags (append (list 'summary) default-block-tags))) ;tags that aren't wrapped in p
 
 (define (root . elements)
   (txexpr 'root empty (decode-elements elements
-                                       #:txexpr-elements-proc (compose1 decode-paragraphs decode-linebreaks)
+                                       #:exclude-tags (list 'code 'pre 'a 'table 'figure 'figcaption) ; do not do smartquotes or dashes in code blocks or tables
+                                       #:txexpr-elements-proc (compose1 decode-paragraphs)
                                        #:string-proc (compose1 smart-quotes smart-dashes))))
 
 ;Number -> List<Number>
@@ -30,7 +99,7 @@
 ; String or Number -> Txexpr
 ;returns 2^n rendered correctly in html
 (define (2^ n #:style [style '()])
-  (define s 
+  (define s
     (cond [(string? n) n]
           [(number? n) (number->string n)]))
   (txexpr 'span style (list "2" (txexpr 'sup empty (list s)))))
@@ -65,36 +134,48 @@
 
 ;thead<tr<th>> -> xml table
 ; can take 1 heading, or list of them
-(define (table headings #:caption [caption empty] #:style [style empty] . entries )
-  (txexpr 'table style (append (match caption 
-                                 [s #:when (string? caption) (list (txexpr 'caption empty (list s)))]
-                                 [s #:when (and (not (empty? caption)) (symbol? (car caption))) (list (txexpr 'caption empty (list s)))]
-                                 [_ (list (txexpr 'caption empty caption))]) 
-                               (cond [(symbol? (car headings)) (list headings)]
-                                     [else headings]) entries)))
-
-;List<List<Key,Value>> -> txexpr
-(define (summaryc attr . h)
-  (txexpr 'summary attr h))
+(define (table headings #:caption [caption empty] #:style [style empty] . entries)
+  (txexpr 'table style
+          (append (match caption
+                    [s #:when (string? caption) (list (txexpr 'caption empty (list s)))]
+                    [s #:when (and (not (empty? caption)) (symbol? (car caption))) (list (txexpr 'caption empty (list s)))]
+                    [_ (list (txexpr 'caption empty caption))])
+                  (cond [(symbol? (car headings)) (list headings)]
+                        [else headings]) entries)))
 
 ;String String -> txexpr
 (define (q heading . content)
-  (txexpr 'details empty (append (list (summaryc (list '(class "question")) heading)) content)))
+  (txexpr 'details empty (append (list (txexpr 'summary '((class "question")) (list heading))) content)))
 
 ;String String -> txexpr
 (define (step heading . content)
-  (txexpr 'details '((open "true")) (append (list (summaryc (list '(class "step")) heading)) content)))
-
-;String String -> txexpr
-(define (more-examples . content)
-  (txexpr 'details empty (append (list (summaryc (list '(class "more-examples")) "Extra Examples")) content)))
+  (txexpr 'details '((open "")) (append (list (txexpr 'summary '((class "step")) (list heading))) content)))
 
 ;accepts only the uid, not the full url
-(define (yt link)
-  (txexpr 'details empty (list (txexpr
-                                'summary '((style "color:red;")) (list "Youtube")) (txexpr 'iframe
-                                                                                           (list  (cons 'srcdoc (cons (string-append "<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/" link "?autoplay=1><img src=https://img.youtube.com/vi/" link "/hqdefault.jpg><span>▶</span></a>") empty))
-                                                                                                  '(allow "picture-in-picture") '(allowfullscreen "true") '(loading "lazy") '(width "560") '(height "315")) empty))))
+; https://youtu.be/fQnUTmOu3lc?t=1777
+; String String Bool -> txexpr
+; link to url, optional headline, optional bool
+(define (yt link #:headline [headline "Youtube"] #:open [open #false])
+  (define split (string-split link "?"))
+  (define cleaned-link-for-thumbnail (if (cons? split) (car split) link))
+  (define start-open (if open '((open "")) null))
+  (define sdoc-string
+    (string-append "<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/" link "?autoplay=1><img src=https://img.youtube.com/vi/" cleaned-link-for-thumbnail "/hqdefault.jpg><span>▶</span></a>"))
+  (txexpr
+    'details
+    start-open
+    (list
+      (txexpr
+        'summary '((style "color:red;")) (list headline))
+      (txexpr
+        'iframe
+        `((srcdoc ,sdoc-string)
+          (allow "picture-in-picture")
+          (allowfullscreen "true")
+          (loading "lazy")
+          (width "560")
+          (height "315"))
+        empty))))
 
 ; String -> String
 ; flips the bits
@@ -111,7 +192,7 @@
 ;Number -> List<Char>
 ;use padded version for padding negative numbers
 ; NEGATIVE NUMBERS HAVE TO ACCOUNT FOR BIT WIDTH
-(define (deci->binary  n #:width [width 0])
+(define (deci->binary n #:width [width 0])
   (define conv (~r #:base 2 (abs n)))
   ; Number -> Binary String
   (define (pad n)
@@ -130,20 +211,30 @@
                conv]))
   (string->list t))
 
-
 ; number number -> txexpr
 ; 101011 -> 101011_2 where _2 will be printed in a subscript form
 (define (base n n2)
   (txexpr 'span empty
-          (list (if (number? n) (number->string n) n) 
+          (list (if (number? n) (number->string n) n)
                 (txexpr 'sub empty (list (cond [(number? n2) (number->string n2)]
                                                [else n2]))))))
 
 ;String -> txexpr
 ;returns hashlink id of an h2
-(define (sub-heading s)
+(define (h2 s)
   (define slug (string-downcase (string-replace s " " "_")))
-  (txexpr 'h2 (list (cons 'id (cons slug empty))) (list (txexpr 'a (list '(class "anchor") (cons 'href (cons (string-append "#" slug) empty))) (list "#")) s)))
+  (txexpr
+    'h2
+    `((id ,slug))
+    (list
+      (txexpr 'a
+              `((class "anchor") (href ,(string-append "#" slug)))
+              '("#"))
+      s)))
+
+
+;for backwards compatability reasons
+(define (sub-heading s) (h2 s))
 
 ;List<T..N> -> List<T..N>
 ;removes special characters and converts racket data types to strings from list
@@ -158,7 +249,8 @@
   (define first (car l))
   (define (aux i) (map (lambda (x) (txexpr 'li empty (list x))) i))
   (cond [(list? first) (aux (clean first))]
-        [else (aux (clean l))]))
+        [else (aux (clean l))])
+  )
 
 (define (steps . l)
   (txexpr 'ol (list '(class "steps")) (list->li l)))
@@ -185,7 +277,7 @@
                         [else t]))
   (txexpr 'span '((style "color:red;")) (list discrim)))
 
-;highlight the first element red 
+;highlight the first element red
 ; List<Char> -> Txexpr<Span "" <Span "">>
 (define (highlight-msb lst)
   (txexpr 'span empty (list (txexpr 'span '((style "color:red;")) (list (list->string (list (car lst))))) (list->string (rest lst)))))
@@ -201,15 +293,11 @@
   (reverse (aux n '())))
 
 (define (layout-spread-row . items)
-  (txexpr 'div '((class "layout-spread-row wrap")) items))
-
-(define (p-img path #:style [style empty])
-  (txexpr 'img (list (append (cons 'src (cons path empty)) style)) empty)
-  )
+  (txexpr 'div '((class "layout-spread-row")) items))
 
 ; string path relative to image folder, e.g "/images"
 (define (img-row #:width [width "10vh"] . paths)
-  (txexpr 'div '((class "layout-spread-row wrap")) (map (lambda (i) (txexpr 'img (list (cons 'src (cons i empty)) '(style "width: 10vh") ) empty)) paths)
+  (txexpr 'div '((class "layout-spread-row wrap")) (map (lambda (i) (txexpr 'img (list (cons 'src (cons i empty)) '(style "width: 10vh")) empty)) paths)
           ))
 
 (define (max-bit-table f caption)
@@ -232,10 +320,10 @@
     (define count (+ MAX-NEG LEN))
     (cond [(= LEN MAX) (reverse acc)]
           [else
-           (define r (deci->binary count #:width bits) )
+           (define r (deci->binary count #:width bits))
            (aux (cons (list count (cond [(negative? count) (highlight-msb (rest r))]
                                         [else (list->string r)])
-           
+
                             ) acc))]))
   (max-bit-table aux "signed"))
 
@@ -248,44 +336,53 @@
 (define (trim-ext s)
   (string-replace s (bytes->string/utf-8 (path-get-extension s)) "" #:all? #f))
 
-; List<Page> -> txexpr
-; pass in the (rest) of page-tree root
-; '(pagetree-root (00-Overview.html 01-Language.html 02-Boolean_Logic.html 03-Optimization.html 04-NAND_HDL.html 05-Multibit_buses.html) (06-BinaryNumbers.html 07-BinaryAddition.html 08-ALU.html)) -> (txexpr) with all the items
+(define ex '(pagetree-root (introduction.html installation.html) (misc/evolvedsimplicity.html misc/effective_education.html misc/howtowritecleancode.html misc/badui.html misc/learning_stages.html)))
 
-(define (generate-toc ls)
-  (define (wrap page-file)
-    (define imp (dynamic-require (string-append (symbol->string page-file) ".pm") 'doc))
-    (define time-info (select 'time imp))
-    (define link-to-page (symbol->string page-file))
-    ; MAKE SURE EVERY PAGE HAS AN H1
-    ; (println page-file)
-    (txexpr 'li empty (list (cond [(not time-info) ""]
-                                  [else (string-append time-info " --- ")])
-                            (txexpr 'a (list (cons 'href (cons link-to-page '()))) (list (select 'h1 imp))))))
-  
-  (define (sec items)
-    (txexpr 'ul '((style "list-style-type: none;")) (map wrap items)))
-  (map sec ls))
+; List<'page-root List<Symbol>>
+; takes a pollen ptree pageroot
+(define (generate-toc root)
+  ; List<Symbols> -> List<(String List<txexpr> Symbol)
+  ; returns: (list h1 (list h2s...) 'filename.html)
+  (define (get-headings path)
+    (define imp (dynamic-require (string-append (symbol->string path) ".pm") 'doc))
+    (define hd (select 'h1 imp))
+    (define subs (select* 'h2 imp))
+    (cond [(string? hd) (list hd (if (list? subs) subs null) path)]
+          [else (raise-user-error (string-append "there was no h1 on: " (symbol->string path))) ""]))
 
-#;
-(define test '(pagetree-root
-  (00-Overview.html
-   01-Language.html
-   02-Boolean_Logic.html
-   03-Optimization.html
-   04-NAND_HDL.html
-   05-Multibit_buses.html)
-  (06-BinaryNumbers.html
-   07-Binary_Addition.html
-   07-Negative_Numbers_Twos_Complement.html
-   08-Binary_Subtraction.html
-   09-ALU.html)))
-#;
-(generate-toc (cdr test))
+  (define (wrap j)
+    (define heading (first j))
+    (define filename (symbol->string (last j)))
+    (define subs (second j))
+    (define h2s (map (lambda (anc title)
+                       (define attrs (get-attrs anc))
+                       (define hashed-url (second (second attrs)))
+                       (define updated-url (string-append filename hashed-url))
+                       (define updated-attrs (list (cons 'href (list updated-url))))
+                       ; (println updated-attrs)
+                       ; (println anc)
+                       (define updated-anc (txexpr (get-tag anc) updated-attrs (list title)))
+                       ; (println updated-anc)
+                       (txexpr 'li empty (list updated-anc)))
+                     (filter-not string? subs) (filter string? subs)))
+    (txexpr 'li empty
+            (list (txexpr 'a (list (cons 'href (list filename)))
+                          (list heading
+                                (txexpr 'ul empty h2s))))))
 
-#;
-(define (pre . s)
-  "")
+  ; List<Symbol> -> txexpr
+  ; '(intro.html)
+  (define (section items)
+    (define headings (map get-headings items))
+    (define section-heading (first (first headings)))
+    (txexpr 'li empty (list (h2 section-heading) (txexpr 'ol '((start "0")) (map wrap headings)))))
+  (txexpr 'ol '((start "0")) (map section (cdr root))))
 
+(define ptree-example '((introduction.html learning_stages.html installation.html) (expressions.html exercise_pythag.html strings.html images.html rtfm.html variables.html functions.html parens_error.html stepper.html)))
 ;(generate-toc (list (list 'misc/EvolvedSimplicity.html)))
 ;(generate-toc (list (list (build-path (current-directory) "misc" "EvolvedSimplicity.html"))))
+
+(define (stack-step title . content)
+  `(div ((class "stack-tep-container"))
+        (h3 ,title)
+        (pre ((class "")) ,@content)))

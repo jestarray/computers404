@@ -1,6 +1,6 @@
 #lang pollen
 
-@h1{Sequential Logic}
+◊h1{Sequential Logic}
 
 The gates we've built all so far are combinational, meaning they depend soley on their inputs that we humans manually plug in. 
 

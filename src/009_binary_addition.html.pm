@@ -1,13 +1,13 @@
 #lang pollen
-@h1{Binary Addition}
+◊h1{Binary Addition}
 
-@(yt "_XEl45i8YqM")
+◊(yt "_XEl45i8YqM")
 
-@sub-heading{How to add binary numbers?}
+◊sub-heading{How to add binary numbers?}
 
-@h3{All 5 possible scenarios of binary addition:}
+◊h3{All 5 possible scenarios of binary addition:}
 
-@(img-row "/images/bin-1.svg" "/images/bin-2.svg" "/images/bin-3.svg" "/images/bin-4.svg" "/images/bin-5.svg")
+◊(img-row "/images/bin-1.svg" "/images/bin-2.svg" "/images/bin-3.svg" "/images/bin-4.svg" "/images/bin-5.svg")
     
 You add binary numbers the same as you would regular decimal numbers! In a decimal system, we carry to the left whenever we go above 9. In a binary system we carry when we go above 2 as highlighted in red.
 
@@ -15,31 +15,31 @@ To make sense of why 1 + 1 + 1 = 11, imagine 5 + 5 + 5. We add the two fives: 5 
 
 Let's add 4 bit binary numbers 0111 + 1110. 
 
-@steps{
-    @step{
+◊steps{
+    ◊step{
         Start from right to left (<--)
-        @(pre "
+        ◊(pre "
   0 1 1 1 (7)
 + 1 1 1 0 (14)
 __________
         1
         ")
     }
-    @step{Add normally and carry as needed
-@(layout-spread-row
-@(pre "
+    ◊step{Add normally and carry as needed
+◊(layout-spread-row
+◊(pre "
     1 <- carry 
   0 1 1 1 (7)
 + 1 1 1 0 (14)
 __________
       0 1 ")
-@(pre "
+◊(pre "
   1 1 <- carry 
   0 1 1 1 (7)
 + 1 1 1 0 (14)
 __________
     1 0 1  ")
-@(pre "
+◊(pre "
 1 1 1 <- carry 
   0 1 1 1 (7)
 + 1 1 1 0 (14)
@@ -47,9 +47,9 @@ __________
 1 0 1 0 1 (21) ")
 )
     }
-    @step{
+    ◊step{
        Consider effect of overflow 
-              @(pre "
+              ◊(pre "
  1 1 1 <- carries 
   [0 1 1 1] (7)
 + [1 1 1 0] (14)
@@ -62,10 +62,10 @@ _______
     }
 }
 
-@(max-unsigned-limit-table 4)
+◊(max-unsigned-limit-table 4)
 
-@h3{Check your understanding!}
-@(q "What is 101 + 001 ? (given a 3 bit-width)" @(pre "
+◊h3{Check your understanding!}
+◊(q "What is 101 + 001 ? (given a 3 bit-width)" ◊(pre "
     1
   1 0 1 (5)
 + 0 0 1 (1)
@@ -73,7 +73,7 @@ ________
   1 1 0 (6)
 "))
 
-@(q "What is 111 + 111 ? (given a 3 bit-width)" @(pre "
+◊(q "What is 111 + 111 ? (given a 3 bit-width)" ◊(pre "
 1 1 1
   1 1 1 (7)
 + 1 1 1 (7)
@@ -81,4 +81,4 @@ ________
 1 1 1 0 (14) or (6 because of overflow wraparound)
 "))
 
-@a[#:href "https://jest-systems.netlify.app/#binary_addition(unsigned)"]{More Binary Addition problems with variable bit-width Here}
+◊a[#:href "https://jest-systems.netlify.app/#binary_addition(unsigned)"]{More Binary Addition problems with variable bit-width Here}
