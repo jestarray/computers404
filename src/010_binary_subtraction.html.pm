@@ -1,7 +1,7 @@
 #lang pollen
 ◊h1{Binary Subtraction}
 
-◊sub-heading{How to subtract binary numbers?}
+◊h2{How to subtract binary numbers?}
 
 ◊pre{x + y = x + -y}
 
@@ -92,7 +92,7 @@ Fun Fact: New hardware is not required for subtraction, we just re-use what we d
 
 ◊a[#:href "https://jest-systems.netlify.app/#binary_subtraction(two's_complement)"]{More Signed Binary Subtraction problems with variable bitwidth}
 
-◊sub-heading{Overflow Problems}
+◊h2{Overflow Problems}
 
 There are a few problems with ◊b{signed} arithmetic. 
 

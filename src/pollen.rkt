@@ -44,6 +44,13 @@
               `((class "line-numbers match-braces rainbow-braces")))
           (list (txexpr 'code '((class "language-racket")) contents))))
 
+(define (c-code-block #:data-src [src ""] . contents)
+  (txexpr 'pre
+          (if (non-empty-string? src)
+              `((class "line-numbers match-braces rainbow-braces") (data-src ,src) (data-download-link ""))
+              `((class "line-numbers match-braces rainbow-braces")))
+          (list (txexpr 'code '((class "language-C")) contents))))
+
 ; String -> Txexpr
 ; short for "racket-1-line" produces a racket 1 liner of code
 (define (r1-liner . contents)
@@ -232,10 +239,6 @@
               '("#"))
       s)))
 
-
-;for backwards compatability reasons
-(define (sub-heading s) (h2 s))
-
 ;List<T..N> -> List<T..N>
 ;removes special characters and converts racket data types to strings from list
 (define (clean l)
@@ -293,11 +296,11 @@
   (reverse (aux n '())))
 
 (define (layout-spread-row . items)
-  (txexpr 'div '((class "layout-spread-row")) items))
+  (txexpr 'div '((style "display:flex; justify-content: space-evenly;")) items))
 
 ; string path relative to image folder, e.g "/images"
 (define (img-row #:width [width "10vh"] . paths)
-  (txexpr 'div '((class "layout-spread-row wrap")) (map (lambda (i) (txexpr 'img (list (cons 'src (cons i empty)) '(style "width: 10vh")) empty)) paths)
+  (txexpr 'div '((style "display:flex; justify-content: space-evenly; flex-wrap:wrap;")) (map (lambda (i) (txexpr 'img (list (cons 'src (cons i empty)) '(style "width: 10vh")) empty)) paths)
           ))
 
 (define (max-bit-table f caption)
@@ -386,3 +389,7 @@
   `(div ((class "stack-tep-container"))
         (h3 ,title)
         (pre ((class "")) ,@content)))
+
+(define (red x) (txexpr 'span '((style "color:red;")) (list x)))
+(define (blue x) (txexpr 'span '((style "color:blue;")) (list x)))
+(define (green x) (txexpr 'span '((style "color:green;")) (list x)))

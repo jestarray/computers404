@@ -15,44 +15,55 @@ We can use the distributive property to break this down into something simpler:
 
 You could have did long multiplication, but the point is that, as long as we ◊strong{retain equality}, we can re-arrange pieces of the problem and tease out certain parts, which allows us to more easily reason about a solution, and this is the essence of algebra.
 
-◊sub-heading{Boolean Algebra}
+◊h2{Boolean Algebra}
 
 Boolean algebra has similar properties to regular algebra on numbers, and they are:
 
 ◊h3{Communative Laws:}
 
-◊pre{(x * y) = (y * x)}
+◊pre{(◊red{x} * ◊blue{y}) = (◊blue{y} * ◊red{x})}
 
-◊pre{(x + y) = (y + x)}
+◊pre{(◊red{x} + ◊blue{y}) = (◊blue{y} + ◊red{x})}
 
-that is to say, it doesn't matter how you order the inputs.
+that is to say, it doesn't matter how you ◊strong{order} the inputs for * (AND) and + (OR)
 
 ◊h3{Associative Laws:}
 
-◊pre{(x * (y * z)) = ((x * y) * z)}
+◊pre{(◊red{x} * (◊blue{y} * ◊green{z})) = ((◊red{x} * ◊blue{y}) * ◊green{z})}
 
-◊pre{(x + (y + z)) = ((x + y) + z)}
+◊pre{(◊red{x} + (◊blue{y} + ◊green{z})) = ((◊red{x} + ◊blue{y}) + ◊green{z})}
 
-that is to say the order in which you GROUP operations on inputs doesn't matter.
+that is to say the order in which you ◊strong{group} operations doesn't matter for * (AND) and + (OR)
 
 ◊h3{Distributive Laws:}
-◊pre{(x * (y + z)) = (x * y) + (x * z)}
+◊pre{(◊red{x} * (◊blue{y} + ◊green{z})) = (◊red{x} * ◊blue{y}) + (◊red{x} * ◊green{z})}
 
-◊pre{(x + (y * z)) = (x + y) * (x + z)}
+◊pre{(◊red{x} + (◊blue{y} * ◊green{z})) = (◊red{x} + ◊blue{y}) * (◊red{x} + ◊green{z})}
 
 The ◊strong{major difference} in boolean algebra is that there's a ◊strong{2nd distributive law}, which says that we can distribute ◊strong{+(or)} over ◊strong{*(and)}, unlike regular algebra.
 
 ◊q{Example of why addition distributive law doesn't work for regular numbers
 ◊pre{2 + (3 * 4) = 14}
 ◊pre{(2 + 3) * (2 + 4) = 30}
+◊pre{14 != 30}
 }
 
 ◊h3{DeMorgan Laws:}
-◊pre{!(x * y) = !(x) + !(y)}
+◊pre{!(◊red{x} * ◊blue{y}) = !(◊red{x}) + !(◊blue{y})}
 
-◊pre{!(x + y) = !(x) * !(y)}
+◊pre{!(◊red{x} + ◊blue{y}) = !(◊red{x}) * !(◊blue{y})}
 
 that is to say we can distribute nots(!). Notice how ◊strong{+(OR)} turns into ◊strong{*(AND)} and vice versa when a not(!) is distributed.
+
+◊h3{Idempotence Law:}
+
+◊pre{x + x = x}
+◊pre{x * x = x}
+◊pre{!x * !x = !x}
+
+◊pre{◊red{xy + xy} + z = ◊red{xy} + z}
+
+In other words, if an expression is just repeating operations on itself, you can simplify it to itself.
 
 ◊h2{Example Simplification}
 
@@ -61,20 +72,20 @@ that is to say we can distribute nots(!). Notice how ◊strong{+(OR)} turns into
 
 ◊h3{Using DeMorgans law on the inner !(x + y), we can turn it into this:}
 
-◊pre{!(!x * ◊span[#:style "color: red;"]{!}(x + y))}
-◊pre{!(!x * ◊span[#:style "color: red; "]{(!x * !y)})}
+◊pre{!(!x * ◊red{!}(x + y))}
+◊pre{!(!x * ◊red{(!x * !y)})}
 
 ◊h3{Now the entire expression is only using *(ANDs), we can use the associative law to group and do the left part first:}
 
-◊pre{!(!x * ◊span[#:style "color: red; "]{(!x * !y)})}
-◊pre{!(◊span[#:style "color: red; "]{(!x * !x)} * !y)}
+◊pre{!(!x * ◊red{(!x * !y)})}
+◊pre{!(◊red{(!x * !x)} * !y)}
 
 ◊h3{Apply Idempotence Law (!x * !x) which simplifies to itself}
-◊pre{!(◊span[#:style "color: red; "]{(!x * !x)} * !y)}
-◊pre{!(◊span[#:style "color: red;"]{!x} * !y)}
+◊pre{!(◊red{(!x * !x)} * !y)}
+◊pre{!(◊red{!x} * !y)}
 
 ◊h3{Apply DeMorgans Law again to distribute the outer ! to get:}
-◊pre{◊span[#:style "color: red;"]{!}(!x * !y)}
+◊pre{◊red{!}(!x * !y)}
 
 ◊h3{Finally:}
 ◊pre{(x + y)}

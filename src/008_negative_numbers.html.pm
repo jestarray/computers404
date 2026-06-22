@@ -3,7 +3,7 @@
 
 ◊(yt "Q32TDUTGfQM")
 
-◊sub-heading{Negative aka Signed Numbers in Two's Complement}
+◊h2{Negative aka Signed Numbers in Two's Complement}
 Signed numbers are numbers that can take on ◊b{negative} values. It's called ◊b{signed} because it can take on a "negative sign" as well as a positive sign. This notation of representing negative numbers is called ◊b{two's complement}.
 
 ◊h3{To get the binary representation of a negative number, say -6, we have to:}
@@ -47,7 +47,7 @@ Let's talk about two's complement and what logistics drive 1010 = -6
   }
 }
 
-◊sub-heading{How Two's complement encoding works}
+◊h2{How Two's complement encoding works}
 
 ◊(deci->bin-table -6 4 #:caption "-8 + 2 = -6 (4 bit-width)")
 ◊(deci->bin-table -6 6 #:caption "-32 + 16 + 8 + 2 = -6 (6 bit-width)")
@@ -71,7 +71,7 @@ Let's try a few examples with variable bit-widths:
 ◊a[#:href "https://jest-systems.netlify.app/#decimal_to_binary(two's_complement)"]{More Two's Complement Exercises}
 
 
-◊sub-heading{Multiple Meanings}
+◊h2{Multiple Meanings}
 
 In English we  have words like 
 
@@ -96,7 +96,7 @@ Likewise in the world of bits, the bit pattern: ◊(base 1101010 2) can mean:
 }
 Computers only see zeros and ones, its how and what we humans decide to interpret them that gives them meaning/value.
 
-◊sub-heading{Multiple interpretations of bits}
+◊h2{Multiple interpretations of bits}
 
 Given the bit-width of 4: 
 

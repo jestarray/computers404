@@ -1,6 +1,6 @@
 #lang pollen
 ◊h1{Language}
-◊sub-heading{Bits}
+◊h2{Bits}
 
 A bit holds a value that is either 1 or a 0. Beyond ◊strong{what a bit is}, let's look at what it ◊strong{does}. A bit ◊strong{conveys information}, granted it's a very tiny amount. 
 

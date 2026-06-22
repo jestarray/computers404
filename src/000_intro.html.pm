@@ -5,9 +5,14 @@
 ◊slide{
     ◊h2{Abstraction}
     ◊img[#:src "/images/abstraction_stack.webp"]{}
+    ◊c-code-block{
+int main() {
+    printf("Hello, World!\n");
+    return 0;
+}}
 }
 
-Computer users and programmers, we sit on top of a big stack of abstraction, leaving us completely oblivious to the layers below. It's similar to how many of us know how to drive a car ◊em{but} have no idea how an internal combustion engine works. It's not that we need to know all the layers of abstraction below, ◊em{but} knowing ◊strong{how} things work under the hood is critical in building performant and reliable software, especially in domains such as systems programming, operating systems, and game engines, which need to maximize performance and minimize overhead.
+As computer users and programmers, we sit on top of a big stack of abstraction, leaving us completely oblivious to how layers below work. It's similar to how many of us know how to drive a car ◊em{but} have no idea how an internal combustion engine works. It's not that we need to know all the layers of abstraction below, ◊em{but} knowing ◊strong{how} things work under the hood is critical in building performant and reliable software, especially in domains such as systems programming, operating systems, and game engines, which need to maximize performance and minimize overhead.
 
 Growing up, you may have been told computers speak 0's and 1's, but that's as far as most people get. It can be a little scary to think about what happens below, with intimidating terms such as ◊em{logic gates, boolean algebra, arithmetic logic units, and microarchitecture}, but I promise you it's not as complicated as it seems, nor do you need to be some math wiz to understand it.
 

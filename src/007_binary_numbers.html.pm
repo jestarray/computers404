@@ -29,7 +29,7 @@ If we need more to represent numbers over 16, we need to expand to 5 bits, ◊(2
 ◊(table (table-headings (two-subscripts 5)) (table-entries (list 0 0 0 0 0)))
 
 ◊(hr)
-◊sub-heading{How to convert a binary number to a decimal number?}
+◊h2{How to convert a binary number to a decimal number?}
 ◊steps{
     ◊(step "Look at where there is a 1" (deci->bin-table 7 4) 
     "Notice there are 1's underneeth the 4,2, and 1 headers")
@@ -48,7 +48,7 @@ If we need more to represent numbers over 16, we need to expand to 5 bits, ◊(2
 ◊(q "What is the binary number 1001 in decimal ?" (deci->bin-table 9 4) "answer: 9; because 8 + 1 = 9")
 
 ◊(hr)
-◊(sub-heading "How to convert a decimal number to a binary number?")
+◊(h2 "How to convert a decimal number to a binary number?")
 
 ◊h3{Subtraction method}
 ◊steps{

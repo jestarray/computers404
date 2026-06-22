@@ -1,3 +1,8 @@
+## 2026-06-22
+- RENAME: sub-heading to h2
+- REWRITE: Expand on Nand Theorm page
+- IMPROVED: Color code variables in optimization
+
 ## 2020-03-02
 + Have to introduce binary addition before introducing method to convert negative decimal to twos complement
 + Split binary addition and subtraction into two seperate sections

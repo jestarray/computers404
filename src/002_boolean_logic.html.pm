@@ -219,7 +219,7 @@ Going from:
 You'll be given a ◊strong{truth table}, and you're going to need to find the right combination of operations to write the ◊strong{boolean function} that produces the truth table. Let's explore why and how to do this with an example.
 
 ◊hr{}
-◊sub-heading{Truth Table to Boolean Function}
+◊h2{Truth Table to Boolean Function}
 
 ◊(table 
     (table-headings (list "Mush" "Pep" "OUT" ))

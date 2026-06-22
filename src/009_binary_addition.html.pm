@@ -3,7 +3,7 @@
 
 ◊(yt "_XEl45i8YqM")
 
-◊sub-heading{How to add binary numbers?}
+◊h2{How to add binary numbers?}
 
 ◊h3{All 5 possible scenarios of binary addition:}
 
