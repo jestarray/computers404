@@ -1,4 +1,5 @@
 src/compiled
 # src/*.html
 *.out
-docs
+publish
+compiled

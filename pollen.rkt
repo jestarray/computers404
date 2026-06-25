@@ -87,7 +87,7 @@
   (provide (all-defined-out))
   (require pollen/setup)
   (define project-server-port 1111)
-  (define publish-directory (path->complete-path (build-path 'up "docs")))
+  (define publish-directory (path->complete-path (build-path 'up "publish")))
   (define current-project-root (current-directory))
   (define block-tags (append (list 'summary) default-block-tags))) ;tags that aren't wrapped in p
 
