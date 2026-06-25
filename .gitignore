@@ -1,3 +1,4 @@
 src/compiled
-src/*.html
+# src/*.html
 *.out
+docs

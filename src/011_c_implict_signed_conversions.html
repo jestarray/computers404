@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
+
+    <script src="./slide_mode.js"></script>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "268f8e8ed1cf4189996214dfee7b9d3e"}'></script><!-- End Cloudflare Web Analytics -->
+    <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+    <title>C Implicit Signed Conversions</title>
+</head>
+
+<body>
+    <div class="container">
+        <main class="main-wrapper">
+            <nav>
+            <div id="prev">← <a href="/010_binary_subtraction.html"> Binary Subtraction</a></div>
+            <div id="home"><a href="/index.html">Index</a></div>
+            <div id="next"><a href="/012_alu.html">ALU</a> →</div>
+
+            </nav>
+            <article>
+                <h1>C Implicit Signed Conversions</h1><p>In C, operations on numbers that mix signed and unsigned have a weird unwanted surprising trick, and that is: <strong>signed values implicitly cast to unsigned values</strong>. Such operations include comparison operations as well as the 4 basic arithmetic operations(+, -, *, /), and comparisons(&gt;=, ==, etc). This can result into some very hard to spot bugs.</p><p>By default numbers are signed. Numbers that have a “U” next to them means unsigned literal, e.g 264U.<br/>Given a bit width of 32 bits</p><table width:="100%;"><caption></caption><thead><tr><th>A</th><th>B</th><th>Relation</th><th>Evaluation</th></tr></thead><tbody><tr><td>0</td><td>0U</td><td>==</td><td>unsigned</td></tr><tr><td>-1</td><td>0</td><td>&lt;</td><td>signed</td></tr><tr><td>-1</td><td>0U</td><td><details>&gt;</details></td><td>unsigned</td></tr><tr><td>2147483647</td><td>-2147483647-1</td><td>&gt;</td><td>signed</td></tr><tr><td>2147483647U</td><td>-2147483647-1</td><td>&lt;</td><td>unsigned</td></tr><tr><td>-1</td><td>-2</td><td>&gt;</td><td>signed</td></tr><tr><td>(unsigned)-1</td><td>-2</td><td>&gt;</td><td>unsigned</td></tr><tr><td>2147483647</td><td>2147483648U</td><td>&lt;</td><td>unsigned</td></tr><tr><td>2147483647</td><td>(int)2147483648U</td><td>&gt;</td><td>signed</td></tr></tbody></table><p>There are compiler flags and static analysis tools you can use to warn you when this happens. More newer languages(rust) will force you to cast explicitly.</p><p>Use -Wall -Wextra -pedantic to catch this overflow bug</p>
+            </article>
+        </main>
+    </div>
+</body>
+
+</html>
