@@ -1,4 +1,4 @@
-# computers404
+# systems
 
 these are my writeups for a youtube series I'm doing on computer systems. It uses pollen(Racket) as a static site generator and markup language. Check it out! https://docs.racket-lang.org/pollen/index.html
 

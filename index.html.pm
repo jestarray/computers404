@@ -8,4 +8,4 @@
 ◊h1{Computer Systems}
 ◊toc-list
 
-Report typos and errors at ◊a[#:href "https://github.com/jestarray/computers404"]{https://github.com/jestarray/computers404}
+Report typos and errors at ◊a[#:href "https://github.com/jestarray/systems"]{https://github.com/jestarray/systems}
