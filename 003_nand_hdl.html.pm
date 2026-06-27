@@ -69,6 +69,7 @@ I recommend you ◊strong{first} use the visual NAND game, since the UI is more 
 
 ◊h3{◊a[#:href "/media/project-1.pdf"]{Chip truth tables and specs} (pages 19 to 28)}
 ◊; explain the test script, compare file, etc
+◊object[#:data "/images/diagram_to_hdl.svg" #:type "image/svg+xml"]{}
 }
 
 ◊slide{
