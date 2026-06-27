@@ -6,6 +6,7 @@
 ◊(define toc-list (generate-toc doc))
 
 ◊h1{Computer Systems}
+◊h3{Understanding the Machine One Bit at a Time}
 ◊toc-list
 
 Report typos and errors at ◊a[#:href "https://github.com/jestarray/systems"]{https://github.com/jestarray/systems}
