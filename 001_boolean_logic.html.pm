@@ -1,6 +1,8 @@
 #lang pollen
-◊h1{Boolean Logic}
 
+◊slide{
+◊h1{Boolean Logic}
+}
 ◊(yt "QrAH93HFDqs")
 
 ◊slide{
