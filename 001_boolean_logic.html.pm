@@ -152,18 +152,19 @@ Boolean operations re-use symbols from math such as addition and multiplication 
 Let's evaluate some boolean expressions:
 
 ◊slide{
+◊h3{Evaluate: ◊pre{!((1 * 0) + (1 + 1))}}
+}
 ◊steps{
     ◊step{Evaluate the inner parentheses and work your way outwards
     Problem:
-    ◊pre{!(0 + (1 + 1))}
+    ◊pre{!((1 * 0) + (1 + 1))}
     Solution:
-    ◊pre{!(0 + 1)}
-    ◊pre{!(1)}
+    ◊pre{!((0) + (1))}
+    ◊pre{! (1)}
     ◊pre{0}
 
     Answer: 0
     }
-}
 }
 ◊slide{
 ◊h2{Check your understanding!}
