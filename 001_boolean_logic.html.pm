@@ -34,7 +34,7 @@
     }
   }
 }
-The above terms are synonymous, in that they all refer to the same thing: ◊strong{boolean values}. Earlier computers did not always use binary, it took decades of iteration to settle on binary because of its simplicity and efficiency.
+The above terms are synonymous, in that they all refer to the same idea: ◊strong{binary values}. Earlier computers did not always use binary, it took decades of iteration to settle on binary because of its simplicity and efficiency.
 
 ◊slide{
   ◊h2{Logic}
@@ -192,7 +192,7 @@ Let's evaluate some boolean expressions:
 ◊hr{}
 ◊slide{
 ◊h2{Boolean Functions}
-Abstracting to using functions instead of conrete values, since we're dealing with binary values, we have the luxury of knowing every possible income and outcome of a boolean function. 
+Abstracting to using functions instead of conrete values, since we're dealing with binary values, we have the luxury of knowing every possible input and output of a boolean function. 
 }
 ◊slide{
 ◊h3{Take for example the boolean function}
