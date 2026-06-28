@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500" width="100%" height="100%" style="background-color: white;">
+  <style>
+    .code { font-family: monospace; font-size: 16px; font-weight: bold; }
+    .lbl { font-family: sans-serif; font-size: 14px; font-weight: bold; text-anchor: middle; }
+    .pin-text { font-family: sans-serif; font-size: 13px; font-weight: bold; text-anchor: middle; }
+    .wire { fill: none; stroke-width: 4; stroke-linejoin: round; stroke-linecap: round; }
+    .wire-thin { fill: none; stroke-width: 2.5; stroke-linejoin: round; }
+    .box { fill: none; stroke-width: 2.5; stroke-dasharray: 8,4; }
+    .gate { fill: white; stroke-width: 2.5; stroke-linejoin: round; }
+    
+    .red { stroke: #ff0000; } .red-fill { fill: #ff0000; }
+    .blue { stroke: #0000ff; } .blue-fill { fill: #0000ff; }
+    .green { stroke: #00bb00; } .green-fill { fill: #00bb00; }
+    .purple { stroke: #9400d3; } .purple-fill { fill: #9400d3; }
+    .black { stroke: #000000; } .black-fill { fill: #000000; }
+  </style>
+
+  <defs>
+    <polygon id="pin-in" points="0,0 20,0 26,10 20,20 0,20" class="gate"/>
+    <polygon id="pin-out" points="0,0 30,0 36,10 30,20 0,20" class="gate"/>
+    
+    <path id="and-gate" d="M 0,0 L 20,0 A 20,20 0 0,1 20,40 L 0,40 Z" class="gate"/>
+    <path id="or-gate" d="M 0,0 Q 15,0 35,20 Q 15,40 0,40 Q 10,20 0,0 Z" class="gate"/>
+  </defs>
+
+  <rect class="box red" x="40" y="10" width="480" height="250"/>
+  <text class="lbl red-fill" x="280" y="30">Xor</text>
+
+  <path class="wire-thin black" d="M 5,70 L 15,70 M 10,65 L 15,70 L 10,75"/>
+  <path class="wire-thin black" d="M 5,210 L 15,210 M 10,205 L 15,210 L 10,215"/>
+  <path class="wire-thin black" d="M 545,135 L 555,135 M 550,130 L 555,135 L 550,140"/>
+
+  <use href="#pin-in" x="20" y="60" class="red"/>
+  <text class="pin-text red-fill" x="30" y="74.5">a</text>
+  
+  <use href="#pin-in" x="20" y="200" class="red"/>
+  <text class="pin-text red-fill" x="30" y="214.5">b</text>
+
+  <use href="#pin-out" x="510" y="125" class="red"/>
+  <text class="pin-text red-fill" x="525" y="139.5">out</text>
+
+  <rect class="box blue" x="110" y="35" width="140" height="90"/>
+  <text class="lbl blue-fill" x="180" y="55">Or</text>
+  
+  <use href="#pin-in" x="110" y="55" class="blue"/>
+  <text class="pin-text blue-fill" x="120" y="69.5">a</text>
+  <use href="#pin-in" x="110" y="75" class="blue"/>
+  <text class="pin-text blue-fill" x="120" y="89.5">b</text>
+  <use href="#pin-out" x="215" y="65" class="blue"/>
+  <text class="pin-text blue-fill" x="230" y="79.5">out</text>
+  
+  <use href="#or-gate" x="160" y="55" class="blue"/>
+  <path class="wire-thin blue" d="M 136,65 L 163,65 M 136,85 L 163,85 M 195,75 L 215,75"/>
+
+  <rect class="box green" x="110" y="155" width="140" height="90"/>
+  <text class="lbl green-fill" x="180" y="175">Nand</text>
+  
+  <use href="#pin-in" x="110" y="175" class="green"/>
+  <text class="pin-text green-fill" x="120" y="189.5">a</text>
+  <use href="#pin-in" x="110" y="195" class="green"/>
+  <text class="pin-text green-fill" x="120" y="209.5">b</text>
+  <use href="#pin-out" x="215" y="185" class="green"/>
+  <text class="pin-text green-fill" x="230" y="199.5">out</text>
+  
+  <use href="#and-gate" x="160" y="175" class="green"/>
+  <circle cx="204" cy="195" r="4.5" class="gate green"/> <path class="wire-thin green" d="M 136,185 L 160,185 M 136,205 L 160,205 M 208.5,195 L 215,195"/>
+
+  <rect class="box purple" x="330" y="95" width="140" height="90"/>
+  <text class="lbl purple-fill" x="400" y="115">And</text>
+  
+  <use href="#pin-in" x="330" y="115" class="purple"/>
+  <text class="pin-text purple-fill" x="340" y="129.5">a</text>
+  <use href="#pin-in" x="330" y="135" class="purple"/>
+  <text class="pin-text purple-fill" x="340" y="149.5">b</text>
+  <use href="#pin-out" x="435" y="125" class="purple"/>
+  <text class="pin-text purple-fill" x="450" y="139.5">out</text>
+  
+  <use href="#and-gate" x="380" y="115" class="purple"/>
+  <path class="wire-thin purple" d="M 356,125 L 380,125 M 356,145 L 380,145 M 420,135 L 435,135"/>
+
+  <path class="wire red" d="M 46,70 L 65,70 L 65,65 L 110,65"/> <path class="wire red" d="M 65,70 L 65,185 L 110,185"/> <circle cx="65" cy="70" r="5" class="red-fill"/> <path class="wire red" d="M 46,210 L 80,210 L 80,85 L 110,85"/> <path class="wire red" d="M 80,210 L 80,205 L 110,205"/> <circle cx="80" cy="210" r="5" class="red-fill"/> <path class="wire red" d="M 251,75 L 300,75 L 300,125 L 330,125"/> <text class="lbl red-fill" x="315" y="95">w1</text>
+
+  <path class="wire red" d="M 251,195 L 300,195 L 300,145 L 330,145"/> <text class="lbl red-fill" x="315" y="185">w2</text>
+
+  <path class="wire red" d="M 471,135 L 510,135"/>
+
+  <text x="120" y="295" class="code">
+    <tspan x="120" dy="0" class="black-fill">CHIP <tspan class="red-fill">Xor </tspan>{ </tspan>
+    <tspan x="155" dy="22" class="black-fill">IN <tspan class="red-fill">a, b</tspan>;</tspan>
+    <tspan x="155" dy="22" class="black-fill">OUT <tspan class="red-fill">out</tspan>;</tspan>
+    <tspan x="120" dy="22" class="black-fill">PARTS:</tspan>
+    
+    <tspan x="155" dy="22">
+      <tspan class="blue-fill">Or</tspan><tspan class="black-fill">(</tspan>
+      <tspan class="blue-fill">a</tspan><tspan class="black-fill">=</tspan><tspan class="red-fill">a</tspan><tspan class="black-fill">, </tspan>
+      <tspan class="blue-fill">b</tspan><tspan class="black-fill">=</tspan><tspan class="red-fill">b</tspan><tspan class="black-fill">, </tspan>
+      <tspan class="blue-fill">out</tspan><tspan class="black-fill">=</tspan><tspan class="red-fill">w1</tspan><tspan class="black-fill">);</tspan>
+    </tspan>
+    
+    <tspan x="155" dy="22">
+      <tspan class="green-fill">Nand</tspan><tspan class="black-fill">(</tspan>
+      <tspan class="green-fill">a</tspan><tspan class="black-fill">=</tspan><tspan class="red-fill">a</tspan><tspan class="black-fill">, </tspan>
+      <tspan class="green-fill">b</tspan><tspan class="black-fill">=</tspan><tspan class="red-fill">b</tspan><tspan class="black-fill">, </tspan>
+      <tspan class="green-fill">out</tspan><tspan class="black-fill">=</tspan><tspan class="red-fill">w2</tspan><tspan class="black-fill">);</tspan>
+    </tspan>
+    
+    <tspan x="155" dy="22">
+      <tspan class="purple-fill">And</tspan><tspan class="black-fill">(</tspan>
+      <tspan class="purple-fill">a</tspan><tspan class="black-fill">=</tspan><tspan class="red-fill">w1</tspan><tspan class="black-fill">, </tspan>
+      <tspan class="purple-fill">b</tspan><tspan class="black-fill">=</tspan><tspan class="red-fill">w2</tspan><tspan class="black-fill">, </tspan>
+      <tspan class="purple-fill">out</tspan><tspan class="black-fill">=</tspan><tspan class="red-fill">out</tspan><tspan class="black-fill">);</tspan>
+    </tspan>
+    
+    <tspan x="120" dy="22" class="black-fill">}</tspan>
+  </text>
+</svg>
