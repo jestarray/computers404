@@ -79,7 +79,7 @@ The above terms are synonymous, in that they all refer to the same thing: ◊str
 (table-entries 
 (list "0" "1")
 (list "1" "0")
-) #:caption (list "NOT(-)" ◊img[#:src "images/not_gate.svg"]{}))
+) #:caption (list "NOT(!)" ◊img[#:src "images/not_gate.svg"]{}))
 }
 }
 Above are 3 common boolean operations, ◊em{AND, NOT, OR} and their ◊em{truth tables}, which show ◊strong{all} possible inputs and outputs of each operation. The inputs are electrical signals that are either high or low voltage, which we represent as 1 and 0 respectively.
