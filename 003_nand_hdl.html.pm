@@ -41,7 +41,7 @@ The ◊strong{NAND} is also known as the ◊em{"universal gate"}, meaning it can
 }
 
 ◊h3{16-bit variants}
-◊em{nandgame does not have these but it's easy to do in HDL}
+◊strong{NOTE: }◊em{nandgame does not have these but it's easy to do in HDL}
 ◊ol{
     ◊li{Not16}
     ◊li{And16}
