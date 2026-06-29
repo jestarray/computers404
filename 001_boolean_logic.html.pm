@@ -222,8 +222,10 @@ Going from:
 You'll be given a ◊strong{truth table}, and you're going to need to find the right combination of operations to write the ◊strong{boolean function} that produces the truth table. Let's explore why and how to do this with an example.
 
 ◊hr{}
+◊slide{
 ◊h2{Truth Table to Boolean Function}
 
+How do you, given this truth table, write a boolean function that produces it?
 ◊(table 
     (table-headings (list "Mush" "Pep" "OUT" ))
 (table-entries 
@@ -232,7 +234,7 @@ You'll be given a ◊strong{truth table}, and you're going to need to find the r
 (list 1	0 1)
 (list 1	1 1)
 ))
-
+}
 Say you're throwing a party, and you only want pizzas that have ◊strong{both} mushrooms
 ◊strong{AND} pepperoni, ◊strong{OR} ones that only mushrooms, ◊strong{OR} ones that are plain with no toppings. Above is the truth table for this scenario.
 
