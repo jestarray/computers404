@@ -240,6 +240,7 @@ To find the combination of operations that will allow the pizzas you want to pas
 
 ◊slide{
 ◊h3{Steps to convert Truth Table to a Boolean Function}
+◊h4{This is called "Disjunctive Normal Form"}
 ◊steps{
     ◊step{
         Look at all the patterns that OUTputs 1
